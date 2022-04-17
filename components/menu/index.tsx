@@ -67,6 +67,7 @@ export const MenuRoot = React.forwardRef(function MenuRoot(
 
   return (
     <MenuRootContext.Provider value={reduceBag}>
+      {/* @ts-expect-error */}
       <div ref={ref} {...props}></div>
     </MenuRootContext.Provider>
   );
