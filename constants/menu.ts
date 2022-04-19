@@ -2,11 +2,12 @@ import { MenuStructureType } from "../components/layout/SideNavBar/default";
 import { constructHref } from "../utils/string";
 export const MenuStructure: MenuStructureType[][] = [
   [
-    { text: "Demo", type: "menu" },
+    { text: "Reference", type: "menu" },
     {
-      text: "Style MDX",
+      text: "MDX",
       type: "item",
-      href: constructHref("Demo Style MDX"),
+      id: 1,
+      href: constructHref("MDX Refer Page"),
     },
   ],
   [

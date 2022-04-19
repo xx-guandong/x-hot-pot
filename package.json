@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "heroku-postbuild": "next build && prisma generate && prisma migrate deploy",
-    "script": "TS_NODE_PROJECT='./tsconfig.common.json' ts-node script/prisma.ts",
+    "script": "TS_NODE_PROJECT='./tsconfig.common.json' ts-node",
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,12 +15,14 @@
     "@mdx-js/react": "^2.1.1",
     "@next/mdx": "^12.1.5",
     "@prisma/client": "^3.12.0",
+    "isomorphic-fetch": "^3.0.0",
     "next": "12.1.5",
     "prisma": "^3.12.0",
     "react": "18.0.0",
     "react-dom": "18.0.0"
   },
   "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.36",
     "@types/node": "17.0.24",
     "@types/react": "18.0.5",
     "@types/react-dom": "18.0.1",

@@ -16,4 +16,5 @@ model Page {
   updatedAt DateTime @updatedAt
   title String
   viewCount Int @default(0)
+  mins Int @default(3)
 }

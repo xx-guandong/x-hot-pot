@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import SideNavBar from "../components/layout/SideNavBar/default";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

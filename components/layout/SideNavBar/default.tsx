@@ -7,6 +7,7 @@ import { matchRoute } from "../../../utils/route";
 import { MenuOpenState, MenuRoot } from "../../menu";
 import Menu from "../../menu/Menu";
 import MenuItem from "../../menu/MenuItem";
+import { Page } from "@prisma/client";
 
 type SideNavBarProps = {};
 
@@ -86,6 +87,10 @@ export type MenuStructureType = {
   text: string;
   type: "menu" | "item";
   href?: string;
+  /**
+   * page id, should match database
+   */
+  id?: number;
 };
 
 export default function SideNavBar({}: SideNavBarProps) {
