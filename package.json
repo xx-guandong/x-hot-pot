@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "heroku-postbuild":"next build && prisma generate && prisma migrate deploy",
+    "heroku-postbuild": "next build && prisma generate && prisma migrate deploy",
+    "script": "TS_NODE_PROJECT='./tsconfig.common.json' ts-node script/prisma.ts",
     "start": "next start",
     "lint": "next lint"
   },
