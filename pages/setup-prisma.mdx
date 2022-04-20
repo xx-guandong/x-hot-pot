@@ -1,0 +1,132 @@
+import Note from "../components/mdx/Note";
+import MyLayoutComponent from "../components/mdx/DefaultLayout";
+import QuickNav from "../components/mdx/QuickNav";
+import Page from "../lib/prisma/Page";
+
+export default ({ children, data }) => (
+  <MyLayoutComponent data={data}>{children}</MyLayoutComponent>
+);
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  Page.increasePageById({ id: 5 });
+  const result = await Page.findPageById({ id: 5 });
+  // Pass data to the page via props
+  return { props: { data: result } };
+}
+
+## 1. Install
+
+Install Prisma with
+
+```
+npm install prisma
+```
+
+## 2. Start
+
+Init Prisma
+
+```
+npx prisma init
+```
+
+After that, you can get a **schema.prisma** file under **prisma** file
+
+Change **schema.prisma** to this
+
+```
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Page {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  viewCount Int @default(0)
+}
+```
+
+We choose to use sqlite database, and define the **Page** table in the database, which will be used for each page.
+
+## 3. Migrate
+
+Since we change **schema.prisma**, we need to commit this change to prisma, then we run this command
+
+```
+npx prisma migrate dev --name init
+```
+
+It will create **migrations** file, **dev.db**, **dev.db-journal**
+
+## 4. Prisma Client
+
+```
+npm install @prisma/client
+```
+
+Install ts-node to run script
+
+```
+npm install ts-node --save-dev
+```
+
+Create a new `tsconfig.common.json`
+
+```
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs"
+  }
+}
+
+```
+
+
+And create **script/prisma.ts** and add this content
+
+```
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+async function main() {
+  // ... you will write your Prisma Client queries here
+  const pages = await prisma.page.findMany();
+  console.log(pages);
+}
+
+main()
+  .catch((e) => {
+    throw e;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
+```
+
+This script is to print all the pages, but it is empty now, because we just create the table, not insert any page into it.
+
+Can run `npx TS_NODE_PROJECT='./tsconfig.common.json' ts-node script/prisma.ts` to confirm it
+
+## 5. End
+
+**Congratulations!** the prisma is set up and run
+
+### Reference:
+
+- Prisma Get Started: [Getting Started](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
+
+<QuickNav />

@@ -1,0 +1,64 @@
+import MyLayoutComponent from "../components/mdx/DefaultLayout";
+import Page from "../lib/prisma/Page";
+export default ({ children, data }) => (
+  <MyLayoutComponent data={data}>{children}</MyLayoutComponent>
+);
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  Page.increasePageById({ id: 1 });
+  const result = await Page.findPageById({ id: 1 });
+  // Pass data to the page via props
+  return { props: { data: result } };
+}
+
+
+
+***h1** tag:*
+
+# Default MDX Style Reference
+
+***ul** tag:*
+
+This is a list in markdown:
+
+***li** tag:*
+
+- One
+- Two
+- Three
+
+***h2** tag:*
+
+## Header
+
+***em** tag:*
+
+_Italic_
+
+_strong tag:_
+
+**Blod**
+
+***a** tag:*
+
+[Link](http://a.com)
+
+***blockquote** tag:*
+
+> Blockquote
+
+***code** tag:*
+
+```
+code block
+```
+
+***p** tag:*
+
+**Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+***p** tag:*
+
+**Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+

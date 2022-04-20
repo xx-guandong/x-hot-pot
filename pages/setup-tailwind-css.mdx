@@ -1,0 +1,100 @@
+import MyLayoutComponent from "../components/mdx/DefaultLayout";
+import QuickNav from "../components/mdx/QuickNav";
+import Page from "../lib/prisma/Page";
+
+export default ({ children, data }) => (
+  <MyLayoutComponent data={data}>{children}</MyLayoutComponent>
+);
+
+
+export async function getServerSideProps() {
+   // Fetch data from external API
+  Page.increasePageById({ id: 3 });
+  const result = await Page.findPageById({ id: 3 });
+  // Pass data to the page via props
+  return { props: { data: result } };
+}
+
+
+## 1. Install Tailwind CSS
+
+Use npm/npx install Tailwind CSS
+
+```
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+After it is done, it creates two file (`tailwind.config.js` and `postcss.config.js`)
+
+## 2. Configure your template paths
+
+Add the paths to all of your template files in your **tailwind.config.js** file.
+
+```
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+- [Tailwind Configuration Introduction](https://tailwindcss.com/docs/configuration)
+
+## 3. Add the Tailwind directives to your CSS
+
+Add the @tailwind directives for each of Tailwind’s layers to your **./styles/globals.css** file.
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## 4.Start your build process
+
+Run your build process with `npm run dev`.
+
+```
+npm run dev
+```
+
+## 5.Start using Tailwind in your project
+
+Start using Tailwind’s utility classes to style your content.
+
+Change **page/index.tsx** to
+
+```
+export default function Home() {
+  return (
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  )
+}
+```
+
+If it works, it will show a big **Hello World** text with underline style:
+
+<figure>
+  <img
+    alt="screenshot"
+    src="/img/next-hello-world.png"
+    width={400}
+    height={300}
+    style={{ margin: "auto" }}
+  ></img>
+  <figcaption style={{ textAlign: "center" }}>Fig - Screenshot</figcaption>
+</figure>
+
+### Reference
+
+- [Tailwind CSS and Nextjs integration](https://tailwindcss.com/docs/guides/nextjs)
+
+<QuickNav />
