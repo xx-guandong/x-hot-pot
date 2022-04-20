@@ -1,0 +1,72 @@
+import Note from "../components/mdx/Note";
+import MyLayoutComponent from "../components/mdx/DefaultLayout";
+import QuickNav from "../components/mdx/QuickNav";
+import Page from "../lib/prisma/Page";
+
+export default ({ children, data }) => (
+  <MyLayoutComponent data={data}>{children}</MyLayoutComponent>
+);
+
+
+export async function getServerSideProps() {
+   // Fetch data from external API
+  Page.increasePageById({ id: 2 });
+  const result = await Page.findPageById({ id: 2 });
+  // Pass data to the page via props
+  return { props: { data: result } };
+}
+
+
+## 1. Install
+
+Install Nestjs with [typescript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html), you can choose one of these methods.
+
+```
+npx create-next-app@latest --typescript
+# or
+yarn create next-app --typescript
+# or
+pnpm create next-app -- --typescript
+```
+
+- [npx introduction](https://github.com/npm/cli)
+- [yarn introduction](https://yarnpkg.com/getting-started)
+- [pnpm introduction](https://pnpm.io/installation)
+
+<Note>
+  If you don't have any experience, please check the introductions and recommend
+  just to learn one of them, which is simple to get started. And don't need to
+  worry about others, they all serve to the same purpose.
+</Note>
+
+## 2. Start
+
+After installation, if it works well, you can get a new folder with your project.
+
+Follow the instruction (*command* **`npm run dev`**), starting to run your project.
+
+And here is the screenshot of the first page, if it runs well.
+
+<figure>
+  <img
+    alt="screenshot"
+    src="/img/next-start.png"
+    width={400}
+    height={300}
+    style={{ margin: "auto" }}
+  ></img>
+  <figcaption style={{ textAlign: "center" }}>
+    Fig - Screenshot
+  </figcaption>
+</figure>
+
+
+## 3. End
+**Congratulations!** the nextjs is set up and run
+
+### Reference:
+
+- Nextjs Introduction: [Getting Started](https://nextjs.org/docs/getting-started)
+
+<QuickNav />
+

@@ -13,6 +13,16 @@ const Page = {
       : null;
     return transformedData;
   },
+
+  async increasePageById({ id }: { id: number }) {
+    await page.update({
+      where: { id },
+      data: {
+        viewCount: { increment: 1 },
+      },
+    });
+    return null;
+  },
 };
 
 export default Page;

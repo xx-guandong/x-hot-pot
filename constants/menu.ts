@@ -7,7 +7,7 @@ export const MenuStructure: MenuStructureType[][] = [
       text: "MDX",
       type: "item",
       id: 1,
-      href: constructHref("MDX Refer Page"),
+      href: constructHref("Refer MDX"),
     },
   ],
   [
